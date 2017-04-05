@@ -10,13 +10,13 @@ Description: Includes various tools for ctime.
     timeString - convert a tm struct to a string
     isLeapYear - test a year(int) if it is a leap year
 
-Requirements: string, ctime, stringTools
+Requirements: iostream, ctime, stringTools
 */
 #ifndef TIME_TOOLS_H
 #define TIME_TOOLS_H
 
 #include <ctime>
-#include <string>
+#include <iostream>
 
 std::string itohm(int sec);
 tm toTime(std::string, std::string time = "00:00");

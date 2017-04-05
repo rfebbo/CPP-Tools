@@ -10,7 +10,7 @@ stohm
   Returns:
     string - string formatted as "x hours and x minutes"
 */
-std::string stohm(int sec) {
+std::string itohm(int sec) {
   if (sec <= 0)
     return "";
 

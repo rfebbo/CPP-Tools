@@ -1,3 +1,4 @@
+#include "fileHandler.h"
 #include "ioTools.h"
 #include "timeTools.h"
 
@@ -10,20 +11,20 @@ spacer
   Returns:
     none
 */
-void spacer(std::string title) {
-  for (int i = 0; i < 80; i++) {
+void spacer(std::string title, int width) {
+  for (int i = 0; i < width; i++) {
     std::cout << '-';
   }
   if (title != "") {
     std::cout << std::endl;
-    int spaces = 40 - title.length() / 2;
+    int spaces = (width / 2) - title.length() / 2;
     for (int i = 0; i < spaces; i++) {
       std::cout << " ";
     }
     std::cout << title;
   }
   std::cout << '\n';
-  for (int i = 0; i < 80; i++) {
+  for (int i = 0; i < width; i++) {
     std::cout << '-';
   }
   std::cout << '\n';
@@ -163,31 +164,6 @@ bool ask(std::string question) {
 
 /*
   Name:
-    getDate
-  Description:
-    prompts the user for a date "(MM/DD/YYYY): ". If it is valid it returns the
-    string in the format "(MM/DD/YYYY): ".
-  Parameters:
-    p - the question to ask.
-  Returns:
-    string - string in the format "(MM/DD/YYYY): ".
-*/
-std::string getDate(std::string p) {
-  bool invalidInput = true;
-  std::string date;
-  while (invalidInput) {
-    date = getString(p + "(MM/DD/YYYY): ");
-    if (timeValid(toTime(date))) {
-      invalidInput = false;
-    } else
-      std::cout << "Invalid date. Please enter a valid date.(ex. 08/18/1992)\n";
-  }
-
-  return date;
-}
-
-/*
-  Name:
     paragraph
   Description:
     outputs a string and outputs newlines before the limit is reached but not in
@@ -239,4 +215,52 @@ void paragraph(std::string paragraph, int charIndex, int limit) {
     std::cout << paragraph[i];
   }
   std::cout << std::endl;
+}
+
+/*
+  Name:
+    getDate
+  Description:
+    prompts the user for a date "(MM/DD/YYYY): ". If it is valid it returns the
+    string in the format "(MM/DD/YYYY): ".
+  Parameters:
+    p - the question to ask.
+  Returns:
+    string - string in the format "(MM/DD/YYYY): ".
+*/
+std::string getDate(std::string p) {
+  bool invalidInput = true;
+  std::string date;
+  while (invalidInput) {
+    date = getString(p + "(MM/DD/YYYY): ");
+    if (timeValid(toTime(date))) {
+      invalidInput = false;
+    } else
+      std::cout << "Invalid date. Please enter a valid date.(ex. 08/18/1992)\n";
+  }
+
+  return date;
+}
+
+/*
+getValidPath
+  Description:
+    Promts the user for a path to a file then if the file exists it returns the
+    path in the form of a string.
+  Parameters:
+    none
+  Returns:
+    string - Valid path to a file.
+*/
+std::string getValidPath() {
+  bool validFile;
+  std::string path;
+  do {
+    path = getString("\nPlease enter the name of the file you wish to load: ");
+    // set the validFile variable and test it at the same time.
+    if (!(validFile = fileExists(path))) {
+      std::cout << "That file was not found. Please try again.\n";
+    }
+  } while (!validFile);
+  return path;
 }

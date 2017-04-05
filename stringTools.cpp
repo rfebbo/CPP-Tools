@@ -4,7 +4,7 @@
 numToString
   Description:
     Recieves an int then converts it to a string puting zeros to fill the
-length
+    length
 requrements
   Parameters:
     i - int representing the interger recieved

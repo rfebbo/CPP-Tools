@@ -1,5 +1,4 @@
 #include "fileHandler.h"
-#include "ioTools.h"
 
 /*
 fileExists
@@ -80,27 +79,4 @@ void readStrings(std::string path, std::string strings[]) {
     file.close();
   } else
     std::cout << "Unable to open file\n";
-}
-
-/*
-getValidPath
-  Description:
-    Promts the user for a path to a file then if the file exists it returns the
-    path in the form of a string.
-  Parameters:
-    none
-  Returns:
-    string - Valid path to a file.
-*/
-std::string getValidPath() {
-  bool validFile;
-  std::string path;
-  do {
-    path = getString("\nPlease enter the name of the file you wish to load: ");
-    // set the validFile variable and test it at the same time.
-    if (!(validFile = fileExists(path))) {
-      std::cout << "That file was not found. Please try again.\n";
-    }
-  } while (!validFile);
-  return path;
 }

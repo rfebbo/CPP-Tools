@@ -44,8 +44,9 @@ fitString
     string - string formatted to the requested length
 */
 std::string fitString(std::string s, int length) {
+  if (s.length() <= length)
+    return s;
   s.resize(length, ' ');
-  s.back() = ' ';
   return s;
 }
 
@@ -60,8 +61,47 @@ sToLower
 */
 std::string sToLower(std::string s) {
   std::string lowerS = s;
-  for (size_t i = 0; i < s.length(); i++) {
+  for (int i = 0; i < s.length(); i++) {
     lowerS[i] = tolower(s[i]);
   }
   return lowerS;
+}
+/*
+findCommas
+  Description:
+    Recieves a string and returns the number of commas in it
+  Parameters:
+    s - string
+  Returns:
+    int - number of commas
+*/
+int findCommas(std::string s) {
+  int numCommas = 0;
+  for (int i = 0; i < s.length(); i++)
+    if (s[i] == ',')
+      numCommas++;
+
+  return numCommas;
+}
+
+/*
+csv
+  Description:
+    Recieves a string and an array of strings and fills the array with the
+    values from the first
+  Parameters:
+    s - string that the user wants to be formatted
+    csv - the comma seperated values
+  Returns:
+    none
+*/
+void csv(std::string s, std::string csv[]) {
+  int valueNum = 0;
+  for (int i = 0; i < s.length(); i++) {
+    if (s[i] == ',') {
+      valueNum++;
+      continue;
+    }
+    csv[valueNum] += s[i];
+  }
 }

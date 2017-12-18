@@ -17,9 +17,18 @@ public:
   void addItem(std::string item);
   void addItems(std::string items[], int numToAdd);
   int length() { return numItems; };
+  void disableItem(int);
+  void enableItem(int);
+  void editItem(int, std::string);
+  int numEnabled();
 
 private:
-  std::string menuItems[1000];
+  struct item_t {
+    std::string name;
+    int index;
+    bool enabled;
+  };
+  item_t menuItems[1000];
   std::string menuName;
   int numItems;
 };
